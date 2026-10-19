@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* ───────── Design tokens: Stark White / High-Contrast Minimal ───────── */
+@theme {
+  --color-paper: #ffffff;      /* main background */
+  --color-tile: #f4f4f4;       /* tiles, cart dividers, tabs */
+  --color-ink: #000000;        /* text + 1px structural borders */
+  --color-graphite: #333333;   /* price / SKU data */
+  --color-acid: #e5ff00;       /* key action highlight (Checkout, selected) */
+  --color-crimson: #ff1100;    /* urgent: low stock, errors, destructive */
+  --font-khmer: "Kantumruy Pro", "Khmer OS Battambang", "Noto Sans Khmer", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", var(--font-khmer), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ───────── Khmer ─────────
+   To change the Khmer font: edit --font-khmer above and the Google Fonts <link> in index.html. */
+html[lang="km"] body,
+html[lang="km"] .font-sans,
+html[lang="km"] .mono {
+  font-family: var(--font-khmer);
+}
+/* Letter-spacing and heavy weights break Khmer glyph clusters, so switch them off in Khmer. */
+html[lang="km"] * {
+  letter-spacing: normal !important;
+}
+html[lang="km"] .heading,
+html[lang="km"] .btn,
+html[lang="km"] .label-caps {
+  font-weight: 700;
+  line-height: 1.5;
+}
+html[lang="km"] .heading { text-transform: none; }
+
+body {
+  @apply bg-paper text-ink antialiased;
+}
+
+/* ───────── Reusable building blocks ───────── */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[2px] border border-ink px-4 py-2 text-xs font-extrabold uppercase tracking-[0.1em] transition-colors disabled:cursor-not-allowed disabled:opacity-35;
+  }
+  .btn-solid { @apply bg-ink text-paper hover:bg-graphite; }
+  .btn-ghost { @apply bg-paper text-ink hover:bg-tile; }
+  .btn-acid { @apply bg-acid text-ink hover:brightness-95; }
+  .btn-danger { @apply bg-paper text-crimson border-crimson hover:bg-crimson hover:text-paper; }
+
+  .field {
+    @apply w-full rounded-[2px] border border-ink bg-paper px-3 py-2 text-sm outline-none focus:bg-tile focus:outline focus:outline-2 focus:outline-offset-0 focus:outline-ink;
+  }
+  .label-caps { @apply text-[11px] font-bold uppercase tracking-[0.14em]; }
+  .heading { @apply font-black uppercase tracking-tight; }
+  .mono { @apply font-mono tabular-nums text-graphite; }
+  .panel { @apply border border-ink bg-paper; }
+}
+
+/* ───────── Receipt printing: only #receipt is printed ───────── */
+@media print {
+  body * { visibility: hidden; }
+  #receipt, #receipt * { visibility: visible; }
+  #receipt { position: absolute; inset: 0 auto auto 0; width: 80mm; border: 0; padding: 4mm; }
+  .no-print { display: none !important; }
+}

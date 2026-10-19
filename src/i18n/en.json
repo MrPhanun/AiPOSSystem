@@ -1,0 +1,209 @@
+{
+  "app": {
+    "name": "StylePOS",
+    "tagline": "Clothing Store Management",
+    "brand": "HORANGI"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Employees",
+    "pos": "Point of Sale",
+    "logout": "Sign out",
+    "products": "Products",
+    "sales": "Sales",
+    "customers": "Customers",
+    "inventory": "Inventory"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "loading": "Loading…",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} of {{last}}",
+    "total": "{{count}} total",
+    "error": "Something went wrong. Please try again.",
+    "you": "You",
+    "edit": "Edit",
+    "clear": "Clear"
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Use your staff account to continue",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "invalid": "Email or password is incorrect, or the account is deactivated.",
+    "tooMany": "Too many attempts. Please wait a minute and try again."
+  },
+  "role": {
+    "admin": "Admin",
+    "cashier": "Cashier"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "tiles": {
+      "sales": "Today's sales",
+      "orders": "Orders",
+      "items": "Items sold",
+      "lowStock": "Low stock"
+    },
+    "week": "Last 7 days",
+    "top": "Best sellers (30 days)",
+    "noSales": "No sales yet.",
+    "lowStockList": "Low stock",
+    "allGood": "All items are well stocked."
+  },
+  "pos": {
+    "title": "Point of Sale",
+    "soon": "",
+    "search": "Scan barcode / search SKU",
+    "all": "All",
+    "cart": "Cart",
+    "empty": "Scan or tap an item to start",
+    "items": "{{count}} items",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout",
+    "clear": "Clear",
+    "soldOut": "Sold out",
+    "low": "Low {{count}}",
+    "inStock": "{{count}} in stock",
+    "noResults": "No matching items",
+    "customer": "Customer",
+    "walkIn": "Walk-in",
+    "payment": "Payment",
+    "discount": "Discount",
+    "addToCart": "Add to cart",
+    "chooseSize": "Choose a size",
+    "colors": "{{count}} colours",
+    "options": "{{count}} options"
+  },
+  "users": {
+    "title": "Employees",
+    "add": "Add employee",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "empty": "No employees found.",
+    "searchPlaceholder": "Search by name or email",
+    "createTitle": "New employee"
+  },
+  "errors": {
+    "forbiddenTitle": "403 – Not allowed",
+    "forbiddenText": "Your role does not have access to this page.",
+    "notFoundTitle": "404 – Page not found",
+    "notFoundText": "That page does not exist.",
+    "back": "Go back home"
+  },
+  "customer": {
+    "awaiting": "Awaiting payment",
+    "total": "Total due",
+    "paid": "Payment received",
+    "thanks": "Thank you",
+    "markPaid": "Mark as paid (demo)",
+    "back": "Back to cart",
+    "newSale": "New sale",
+    "confirmPaid": "Confirm payment received"
+  },
+  "pay": {
+    "cash": "Cash",
+    "khqr": "KHQR",
+    "bank_transfer": "Bank transfer"
+  },
+  "sales": {
+    "title": "Sales history",
+    "search": "Search receipt, customer or phone",
+    "receipt": "Receipt",
+    "date": "Date",
+    "cashier": "Cashier",
+    "customer": "Customer",
+    "items": "Items",
+    "view": "View",
+    "print": "Print receipt",
+    "paidWith": "Paid with",
+    "saleComplete": "Sale complete",
+    "empty": "No sales yet.",
+    "void": "Void this sale",
+    "voidReason": "Reason for voiding",
+    "voidConfirm": "Confirm void",
+    "status": {
+      "completed": "Completed",
+      "voided": "Voided",
+      "draft": "Draft",
+      "partially_refunded": "Part refunded",
+      "refunded": "Refunded"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "add": "Add product",
+    "addCategory": "Add category",
+    "categoryName": "Category name",
+    "searchPlaceholder": "Search name, brand, SKU or barcode",
+    "empty": "Nothing found.",
+    "createTitle": "New product",
+    "editTitle": "Edit product",
+    "name": "Name",
+    "category": "Category",
+    "brand": "Brand",
+    "imageHelp": "JPG, PNG or WEBP, up to 5 MB.",
+    "description": "Description",
+    "noDescription": "No description.",
+    "variants": "Sizes & colours",
+    "addVariant": "Add size / colour",
+    "barcode": "Barcode",
+    "size": "Size",
+    "color": "Colour",
+    "cost": "Cost",
+    "price": "Price",
+    "stock": "Stock",
+    "totalStock": "Total stock",
+    "visible": "Visible in POS",
+    "image": "Photo",
+    "chooseImage": "Upload photo",
+    "removeImage": "Remove photo"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "search": "Search product, SKU or barcode",
+    "lowOnly": "Low stock only",
+    "low": "Low",
+    "ok": "OK",
+    "adjust": "Adjust",
+    "history": "History",
+    "add": "Add stock",
+    "remove": "Remove stock",
+    "quantity": "Quantity",
+    "reason": "Reason",
+    "reasonHint": "e.g. New delivery, damaged, recount",
+    "type": "Type",
+    "types": {
+      "sale": "Sale",
+      "purchase_receipt": "Purchase",
+      "adjustment": "Adjustment",
+      "return": "Return",
+      "void_reversal": "Void"
+    }
+  },
+  "customers": {
+    "title": "Customers",
+    "add": "Add customer",
+    "search": "Search name or phone",
+    "phone": "Phone",
+    "address": "Address",
+    "orders": "Orders",
+    "spent": "Total spent",
+    "empty": "No customers yet."
+  }
+}
