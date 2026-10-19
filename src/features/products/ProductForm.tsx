@@ -126,13 +126,19 @@ export default function ProductForm({ product, categories, onClose, onSaved }: {
           <div className="block">
             <span className="label-caps">{t("products.image")}</span>
             <div className="mt-1.5 flex items-center gap-3">
-              <ProductImage
-                url={
-                  preview ?? (removeImage ? null : (product?.image_url ?? null))
-                }
-                alt=""
-                className="h-20 w-20 shrink-0 border border-ink"
-              />
+              {preview || (!removeImage && product?.image_url) ? (
+                <img
+                  src={(preview ?? product?.image_url) as string}
+                  alt=""
+                  className="h-20 w-20 shrink-0 border border-ink object-cover"
+                />
+              ) : (
+                <ProductImage
+                  url={null}
+                  alt=""
+                  className="h-20 w-20 shrink-0 border border-ink"
+                />
+              )}
               <div className="space-y-1.5">
                 <label className="btn btn-ghost cursor-pointer !px-3 !py-1.5">
                   <ImagePlus size={13} /> {t("products.chooseImage")}
