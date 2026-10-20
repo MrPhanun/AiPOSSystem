@@ -16,7 +16,7 @@ export default function ProductImage({
 
   const filename = url?.split("/").pop();
 
-  const imageUrl = filename ? `${API_URL}/product-images/${filename}` : null;
+  const imageUrl = url?.startsWith("data:") ? url : filename ? `${API_URL}/product-images/${filename}` : null;
 
   if (!imageUrl || imageError) {
     return (

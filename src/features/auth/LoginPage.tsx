@@ -3,7 +3,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Loader2, Shirt } from 'lucide-react'
 import { homeFor, useAuth } from './AuthContext'
-import { apiStatus } from '../../lib/api-client'
+import { IS_DEMO, apiStatus } from '../../lib/api-client'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import { TigerLogo, Wordmark } from '../../components/Brand'
 
@@ -14,8 +14,8 @@ export default function LoginPage() {
   const location = useLocation()
   const from = (location.state as { from?: string } | null)?.from
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState(IS_DEMO ? 'testing@pos.com' : '')
+  const [password, setPassword] = useState(IS_DEMO ? '123456789' : '')
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
@@ -71,6 +71,11 @@ export default function LoginPage() {
           <h1 className="heading text-4xl">{t('login.title')}</h1>
           <p className="mb-8 mt-2 text-sm text-graphite">{t('login.subtitle')}</p>
 
+          {IS_DEMO && (
+            <p className="mb-5 rounded-2xl border border-white/80 bg-white/60 px-4 py-2.5 text-xs">
+              <b>Demo account</b> · testing@pos.com / 123456789 (pre-filled). Data is saved in your browser only.
+            </p>
+          )}
           <form onSubmit={onSubmit} className="space-y-5">
             <label className="block">
               <span className="label-caps">{t('login.email')}</span>

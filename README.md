@@ -55,3 +55,15 @@ src/
 ## Notes
 - To change the Khmer font, edit `--font-khmer` in `src/index.css` and the font link in `index.html`.
 - The dev server forwards `/api`, `/sanctum`, and `/product-images` to the backend (see `vite.config.ts`).
+
+## Live demo (GitHub Pages)
+https://mrphanun.github.io/AiPOSSystem/ — runs entirely in the browser with sample data (no backend needed).
+
+| Role  | Email            | Password  |
+|-------|------------------|-----------|
+| Admin | testing@pos.com  | 123456789 |
+
+Demo data is stored in your browser (clear site data to reset). Build it locally with `VITE_DEMO=true npm run build`.
+
+## Full stack (SQL Server)
+`database/schema.sql` creates the tables, `backend/` is the Express API (`cd backend && npm install && node seed.js && npm start`, copy `.env.example` to `.env` first).
