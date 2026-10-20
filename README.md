@@ -1,4 +1,4 @@
-# StylePOS Frontend
+# POS System Frontend
 
 Point-of-sale web app for a clothing shop. Supports English and Khmer.
 

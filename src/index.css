@@ -1,64 +1,119 @@
 @import "tailwindcss";
 
-/* ───────── Design tokens: Stark White / High-Contrast Minimal ───────── */
+/* ───────── Design tokens: Glass / Gen-Z aurora ─────────
+   Token names are kept (paper, tile, ink, acid, crimson) so every page inherits the new look. */
 @theme {
-  --color-paper: #ffffff;      /* main background */
-  --color-tile: #f4f4f4;       /* tiles, cart dividers, tabs */
-  --color-ink: #000000;        /* text + 1px structural borders */
-  --color-graphite: #333333;   /* price / SKU data */
-  --color-acid: #e5ff00;       /* key action highlight (Checkout, selected) */
-  --color-crimson: #ff1100;    /* urgent: low stock, errors, destructive */
+  --color-paper: #ffffff;      /* text on dark surfaces; glass surface is set in .bg-paper below */
+  --color-tile: #f2f2f2;       /* soft tint */
+  --color-ink: #0a0a0a;        /* deep midnight text */
+  --color-graphite: #555555;   /* secondary text */
+  --color-acid: #ffffff;       /* white highlight (checkout, selected) */
+  --color-crimson: #000000;    /* urgent / errors */
+  --color-violet: #000000;
+  --color-pink: #3a3a3a;
+  --color-cyan: #9a9a9a;
   --font-khmer: "Kantumruy Pro", "Khmer OS Battambang", "Noto Sans Khmer", ui-sans-serif, sans-serif;
-  --font-sans: "Inter", var(--font-khmer), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", var(--font-khmer), ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ───────── Khmer ─────────
-   To change the Khmer font: edit --font-khmer above and the Google Fonts <link> in index.html. */
+/* ───────── Khmer ───────── */
 html[lang="km"] body,
 html[lang="km"] .font-sans,
 html[lang="km"] .mono {
   font-family: var(--font-khmer);
 }
-/* Letter-spacing and heavy weights break Khmer glyph clusters, so switch them off in Khmer. */
-html[lang="km"] * {
-  letter-spacing: normal !important;
-}
+html[lang="km"] * { letter-spacing: normal !important; }
 html[lang="km"] .heading,
 html[lang="km"] .btn,
-html[lang="km"] .label-caps {
-  font-weight: 700;
-  line-height: 1.5;
-}
+html[lang="km"] .label-caps { font-weight: 700; line-height: 1.5; }
 html[lang="km"] .heading { text-transform: none; }
 
+/* ───────── Aurora background ───────── */
 body {
-  @apply bg-paper text-ink antialiased;
+  @apply text-ink antialiased;
+  min-height: 100vh;
+  background-color: #ededed;
+  background-image:
+    radial-gradient(60rem 40rem at 8% 0%, rgb(255 255 255 / 0.9), transparent 60%),
+    radial-gradient(55rem 38rem at 100% 10%, rgb(0 0 0 / 0.14), transparent 60%),
+    radial-gradient(50rem 40rem at 50% 100%, rgb(0 0 0 / 0.10), transparent 60%),
+    radial-gradient(30rem 24rem at 0% 100%, rgb(255 255 255 / 0.8), transparent 60%);
+  background-attachment: fixed;
 }
+::selection { background: var(--color-acid); color: var(--color-ink); }
+
+/* ───────── Glass surfaces (override the solid utility classes used across pages) ───────── */
+.bg-paper {
+  background-color: rgb(255 255 255 / 0.55);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+.bg-tile { background-color: rgb(255 255 255 / 0.35); }
+.hover\:bg-tile:hover { background-color: rgb(255 255 255 / 0.75); }
+.focus\:bg-tile:focus { background-color: rgb(255 255 255 / 0.85); }
+.bg-ink { background-image: linear-gradient(135deg, var(--color-violet), var(--color-pink)); color: #fff; }
+/* hairline glass borders instead of heavy black rules */
+[class*="border-ink"] { border-color: rgb(255 255 255 / 0.65); }
+[class*="border-crimson"] { border-color: var(--color-crimson); }
+/* brutalist offset shadows → soft glow */
+[class*="shadow-[6px_6px"], [class*="shadow-[4px_4px"] { box-shadow: 0 24px 60px -12px rgb(0 0 0 / 0.35) !important; }
+[class*="bg-ink/"] { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+table { border-collapse: collapse; }
+tr { border-color: rgb(23 19 46 / 0.08); }
 
 /* ───────── Reusable building blocks ───────── */
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-[2px] border border-ink px-4 py-2 text-xs font-extrabold uppercase tracking-[0.1em] transition-colors disabled:cursor-not-allowed disabled:opacity-35;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/70 px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40;
   }
-  .btn-solid { @apply bg-ink text-paper hover:bg-graphite; }
-  .btn-ghost { @apply bg-paper text-ink hover:bg-tile; }
-  .btn-acid { @apply bg-acid text-ink hover:brightness-95; }
-  .btn-danger { @apply bg-paper text-crimson border-crimson hover:bg-crimson hover:text-paper; }
+  .btn:not(:disabled):hover { transform: translateY(-1px); }
+  .btn:not(:disabled):active { transform: translateY(0) scale(0.98); }
+  .btn-solid {
+    @apply text-white border-transparent shadow-lg shadow-violet/30;
+    background-image: linear-gradient(135deg, var(--color-violet), var(--color-pink));
+  }
+  .btn-solid:hover { filter: brightness(1.08); }
+  .btn-ghost { @apply text-ink; background: rgb(255 255 255 / 0.55); backdrop-filter: blur(12px); }
+  .btn-ghost:hover { background: rgb(255 255 255 / 0.85); }
+  .btn-acid { @apply bg-acid text-ink border-black shadow-lg shadow-black/20; }
+  .btn-acid:hover { filter: brightness(0.96); }
+  .btn-danger { @apply text-black border-black/60; background: rgb(255 255 255 / 0.55); }
+  .btn-danger:hover { @apply bg-crimson text-white; }
 
   .field {
-    @apply w-full rounded-[2px] border border-ink bg-paper px-3 py-2 text-sm outline-none focus:bg-tile focus:outline focus:outline-2 focus:outline-offset-0 focus:outline-ink;
+    @apply w-full rounded-2xl border border-white/80 px-3.5 py-2.5 text-sm outline-none transition;
+    background: rgb(255 255 255 / 0.6);
+    box-shadow: inset 0 1px 2px rgb(23 19 46 / 0.06);
   }
-  .label-caps { @apply text-[11px] font-bold uppercase tracking-[0.14em]; }
-  .heading { @apply font-black uppercase tracking-tight; }
+  .field:focus { background: rgb(255 255 255 / 0.9); box-shadow: 0 0 0 3px rgb(0 0 0 / 0.35); }
+  .label-caps { @apply text-[11px] font-bold uppercase tracking-[0.12em] text-graphite; }
+  .heading { @apply font-extrabold tracking-tight; }
   .mono { @apply font-mono tabular-nums text-graphite; }
-  .panel { @apply border border-ink bg-paper; }
+  .panel {
+    @apply rounded-3xl border border-white/70 bg-paper;
+    box-shadow: 0 10px 40px -12px rgb(0 0 0 / 0.25);
+  }
+  .glass {
+    background: rgb(255 255 255 / 0.5);
+    -webkit-backdrop-filter: blur(26px) saturate(170%);
+    backdrop-filter: blur(26px) saturate(170%);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow: 0 20px 60px -15px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.8);
+  }
 }
+
+@keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-14px) rotate(1.5deg); } }
+.floaty { animation: floaty 6s ease-in-out infinite; }
+@keyframes blob { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, -20px) scale(1.12); } }
+.blob { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: 0.55; animation: blob 12s ease-in-out infinite; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .floaty, .blob { animation: none; } }
 
 /* ───────── Receipt printing: only #receipt is printed ───────── */
 @media print {
+  body { background: #fff !important; }
   body * { visibility: hidden; }
   #receipt, #receipt * { visibility: visible; }
-  #receipt { position: absolute; inset: 0 auto auto 0; width: 80mm; border: 0; padding: 4mm; }
+  #receipt { position: absolute; inset: 0 auto auto 0; width: 80mm; border: 0; padding: 4mm; background: #fff !important; backdrop-filter: none !important; box-shadow: none !important; }
   .no-print { display: none !important; }
 }

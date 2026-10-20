@@ -1,8 +1,9 @@
 {
   "app": {
-    "name": "StylePOS",
+    "name": "HORANGI POS System",
     "tagline": "ប្រព័ន្ធគ្រប់គ្រងហាងលក់សម្លៀកបំពាក់",
-    "brand": "HORANGI"
+    "brand": "HORANGI",
+    "slogan": "អាវថ្មី ស្ទីលក្លាហាន"
   },
   "nav": {
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
@@ -25,6 +26,8 @@
     "total": "សរុប {{count}}",
     "error": "មានបញ្ហាកើតឡើង។ សូមព្យាយាមម្តងទៀត។",
     "you": "អ្នក",
+    "delete": "លុប",
+    "confirmDelete": "លុបធាតុនេះមែនទេ? មិនអាចត្រឡប់វិញបានទេ។",
     "edit": "កែប្រែ",
     "clear": "សម្អាត"
   },

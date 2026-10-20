@@ -21,7 +21,7 @@ export default function CustomerDisplay({ totalText, altTotalText, itemCount, me
   return (
     <div className="fixed inset-0 z-40 flex flex-col bg-paper">
       <div className="flex items-center justify-between border-b border-ink px-6 py-3">
-        <span className="mono text-[11px] uppercase tracking-[0.2em]">HORANGI / STYLEPOS</span>
+        <span className="mono text-[11px] uppercase tracking-[0.2em]">HORANGI / POS SYSTEM</span>
         <span className="mono text-[11px] uppercase tracking-[0.2em]">{t('pos.items', { count: itemCount })}</span>
       </div>
 

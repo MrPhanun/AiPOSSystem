@@ -25,7 +25,7 @@ export default function LanguageSwitcher() {
   )
 
   return (
-    <div className="inline-flex overflow-hidden rounded-[2px] border border-ink">
+    <div className="inline-flex overflow-hidden rounded-full border border-white/80 bg-white/50">
       {btn('en', 'EN')}
       {btn('km', 'ខ្មែរ')}
     </div>

@@ -138,27 +138,27 @@ export default function PosPage() {
 
   return (
     <>
-      <div className="grid md:h-[calc(100vh-3.5rem)] md:grid-cols-[1fr_400px]">
+      <div className="grid gap-4 p-3 md:h-[calc(100vh-5rem)] md:grid-cols-[1fr_400px]">
         {/* ───────── Catalog ───────── */}
-        <section className="flex min-h-0 flex-col border-ink md:border-r">
-          <div className="relative border-b border-ink">
-            <Search size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2" />
+        <section className="glass flex min-h-0 flex-col overflow-hidden rounded-[2rem]">
+          <div className="relative p-4 pb-2">
+            <Search size={16} className="pointer-events-none absolute left-9 top-1/2 -translate-y-1/2 mt-1" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && onSearchEnter()}
               placeholder={t('pos.search')}
-              className="mono w-full bg-paper py-4 pl-11 pr-4 text-sm outline-none placeholder:text-graphite/60 focus:bg-tile"
+              className="field mono !rounded-full !py-3.5 !pl-12 !pr-5"
             />
           </div>
 
-          <div className="flex overflow-x-auto border-b border-ink bg-tile">
+          <div className="flex gap-2 overflow-x-auto px-4 py-2">
             {([{ id: 'all' as const, name: t('pos.all') }, ...categories]).map((c) => (
               <button
                 key={c.id}
                 type="button"
                 onClick={() => setCategory(c.id)}
-                className={`whitespace-nowrap border-r border-ink px-5 py-3 text-xs font-extrabold uppercase tracking-[0.12em] ${category === c.id ? 'bg-ink text-paper' : 'hover:bg-paper'}`}
+                className={`whitespace-nowrap rounded-full border border-white/80 px-5 py-2 text-xs font-bold transition-all ${category === c.id ? 'bg-ink text-paper shadow-md shadow-black/25' : 'bg-white/50 hover:bg-white/90'}`}
               >
                 {c.name}
               </button>
@@ -173,7 +173,7 @@ export default function PosPage() {
             ) : items.length === 0 ? (
               <p className="p-10 text-center text-sm">{t('pos.noResults')}</p>
             ) : (
-              <div className="grid grid-cols-2 gap-px border-b border-ink bg-ink lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid grid-cols-2 gap-4 p-4 lg:grid-cols-3 xl:grid-cols-4">
                 {products.map((p) => {
                   const out = p.stock === 0
                   const colorCount = new Set(p.all.map((v) => v.color)).size
@@ -183,10 +183,10 @@ export default function PosPage() {
                       type="button"
                       disabled={out}
                       onClick={() => (p.all.length === 1 ? change(p.all[0], 1) : setPickId(p.id))}
-                      className="relative flex flex-col bg-tile text-left hover:bg-paper disabled:cursor-not-allowed disabled:opacity-50"
+                      className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/80 bg-white/60 p-2 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white/90 hover:shadow-xl hover:shadow-black/15 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                     >
-                      <ProductImage url={p.first.image_url} alt={p.first.product_name} className="aspect-[4/3] w-full" />
-                      <div className="p-3">
+                      <ProductImage url={p.first.image_url} alt={p.first.product_name} className="aspect-[4/3] w-full rounded-2xl" />
+                      <div className="px-2 pb-2 pt-3">
                         <div className="flex items-start justify-between gap-2">
                           <span className="mono text-[10px] uppercase tracking-wider">{p.first.category_name}</span>
                           <span className={`mono text-[10px] font-bold uppercase ${out ? 'text-crimson' : ''}`}>
@@ -202,7 +202,7 @@ export default function PosPage() {
                         </div>
                       </div>
                       {p.inCart > 0 && (
-                        <span className="mono absolute right-0 top-0 translate-y-5 border border-ink bg-acid px-2 py-0.5 text-xs font-bold text-ink">×{p.inCart}</span>
+                        <span className="mono absolute right-4 top-4 rounded-full border border-black bg-acid px-2.5 py-0.5 text-xs font-bold text-ink">×{p.inCart}</span>
                       )}
                     </button>
                   )
@@ -213,12 +213,12 @@ export default function PosPage() {
         </section>
 
         {/* ───────── Cart ───────── */}
-        <aside className="flex min-h-[420px] flex-col border-t border-ink md:min-h-0 md:border-t-0">
-          <div className="flex items-center justify-between border-b border-ink px-4 py-3">
+        <aside className="glass flex min-h-[420px] flex-col overflow-hidden rounded-[2rem] md:min-h-0">
+          <div className="flex items-center justify-between px-5 py-4">
             <h2 className="heading text-xl">{t('pos.cart')} <span className="mono text-sm font-normal">({itemCount})</span></h2>
-            <div className="inline-flex overflow-hidden rounded-[2px] border border-ink">
+            <div className="inline-flex overflow-hidden rounded-full border border-white/80 bg-white/50 p-0.5">
               {(['USD', 'KHR'] as const).map((c) => (
-                <button key={c} type="button" onClick={() => setCurrency(c)} className={`mono px-3 py-1 text-[11px] font-bold ${currency === c ? 'bg-ink text-paper' : 'bg-paper text-ink hover:bg-tile'}`}>{c}</button>
+                <button key={c} type="button" onClick={() => setCurrency(c)} className={`mono rounded-full px-3 py-1 text-[11px] font-bold transition ${currency === c ? '!bg-ink !text-paper' : 'bg-transparent text-ink hover:bg-white/80'}`}>{c}</button>
               ))}
             </div>
           </div>
@@ -229,21 +229,21 @@ export default function PosPage() {
                 <p className="text-sm text-graphite">{t('pos.empty')}</p>
               </div>
             ) : (
-              <ul className="divide-y divide-ink/20">
+              <ul className="space-y-2 px-3 pb-3">
                 {lines.map(({ item, qty }) => (
-                  <li key={item.id} className="px-4 py-3">
+                  <li key={item.id} className="rounded-2xl border border-white/70 bg-white/55 px-4 py-3">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <div className="heading truncate text-[13px]">{item.product_name}</div>
                         <div className="mono text-[11px]">{item.color} / {item.size} · {item.sku}</div>
                       </div>
-                      <button type="button" onClick={() => change(item, -qty)} aria-label="remove" className="p-1 hover:bg-tile"><X size={14} /></button>
+                      <button type="button" onClick={() => change(item, -qty)} aria-label="remove" className="rounded-full p-1.5 hover:bg-white/80"><X size={14} /></button>
                     </div>
                     <div className="mt-2 flex items-center justify-between">
-                      <div className="inline-flex items-stretch border border-ink">
-                        <button type="button" onClick={() => change(item, -1)} className="px-2 hover:bg-tile" aria-label="minus"><Minus size={13} /></button>
+                      <div className="inline-flex items-stretch overflow-hidden rounded-full border border-white/80 bg-white/60">
+                        <button type="button" onClick={() => change(item, -1)} className="px-2.5 hover:bg-white/90" aria-label="minus"><Minus size={13} /></button>
                         <span className="mono min-w-8 border-x border-ink px-2 py-1 text-center text-sm font-bold text-ink">{qty}</span>
-                        <button type="button" onClick={() => change(item, 1)} disabled={qty >= item.stock_quantity} className="px-2 hover:bg-tile disabled:opacity-30" aria-label="plus"><Plus size={13} /></button>
+                        <button type="button" onClick={() => change(item, 1)} disabled={qty >= item.stock_quantity} className="px-2.5 hover:bg-white/90 disabled:opacity-30" aria-label="plus"><Plus size={13} /></button>
                       </div>
                       <div className="mono text-sm font-bold text-ink">{fmt(item.selling_price * qty)}</div>
                     </div>
@@ -253,7 +253,7 @@ export default function PosPage() {
             )}
           </div>
 
-          <div className="border-t border-ink bg-tile p-4">
+          <div className="m-2 rounded-[1.5rem] border border-white/70 bg-white/55 p-4">
             <div className="grid grid-cols-2 gap-2">
               <label className="block">
                 <span className="label-caps flex items-center gap-1"><UserRound size={11} /> {t('pos.customer')}</span>
@@ -284,7 +284,7 @@ export default function PosPage() {
                 <span className="mono">-{fmt(discountNum)}</span>
               </div>
             )}
-            <div className="mt-2 flex items-baseline justify-between border-t border-ink pt-3">
+            <div className="mt-2 flex items-baseline justify-between border-t border-black/10 pt-3">
               <span className="heading text-lg">{t('pos.total')}</span>
               <div className="text-right">
                 <div className="mono text-4xl font-bold text-ink">{fmt(total)}</div>

@@ -1,8 +1,9 @@
 {
   "app": {
-    "name": "StylePOS",
-    "tagline": "Clothing Store Management",
-    "brand": "HORANGI"
+    "name": "HORANGI POS System",
+    "tagline": "Fast checkout. Smart stock.",
+    "brand": "HORANGI",
+    "slogan": "Fresh shirts. Fearless style."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -25,6 +26,8 @@
     "total": "{{count}} total",
     "error": "Something went wrong. Please try again.",
     "you": "You",
+    "delete": "Delete",
+    "confirmDelete": "Delete this item? This cannot be undone.",
     "edit": "Edit",
     "clear": "Clear"
   },

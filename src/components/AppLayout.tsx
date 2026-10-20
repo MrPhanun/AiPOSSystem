@@ -23,39 +23,39 @@ export default function AppLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="flex h-14 shrink-0 items-stretch border-b border-ink bg-paper">
-        <div className="flex items-center border-r border-ink px-4">
-          <Wordmark size={32} />
-        </div>
+      <div className="sticky top-0 z-20 px-3 pt-3">
+        <header className="glass flex h-14 items-center gap-2 rounded-full px-3 sm:px-4">
+          <Wordmark size={34} />
 
-        <nav className="flex items-stretch overflow-x-auto">
-          {NAV.filter((n) => n.roles.includes(user.role)).map(({ to, key }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `flex items-center whitespace-nowrap border-r border-ink px-5 text-xs font-extrabold uppercase tracking-[0.12em] ${
-                  isActive ? 'bg-ink text-paper' : 'hover:bg-tile'
-                }`
-              }
-            >
-              {t(key)}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="mx-2 flex items-center gap-1 overflow-x-auto sm:mx-4">
+            {NAV.filter((n) => n.roles.includes(user.role)).map(({ to, key }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all ${
+                    isActive ? 'bg-ink text-paper shadow-md shadow-black/30' : 'text-ink hover:bg-white/70'
+                  }`
+                }
+              >
+                {t(key)}
+              </NavLink>
+            ))}
+          </nav>
 
-        <div className="ml-auto flex items-center gap-4 px-4">
-          <LanguageSwitcher />
-          <div className="hidden text-right leading-tight sm:block">
-            <div className="text-sm font-bold">{user.name}</div>
-            <div className="mono text-[10px] uppercase tracking-[0.15em]">{t(`role.${user.role}`)}</div>
+          <div className="ml-auto flex items-center gap-3">
+            <LanguageSwitcher />
+            <div className="hidden text-right leading-tight sm:block">
+              <div className="text-sm font-bold">{user.name}</div>
+              <div className="mono text-[10px] uppercase tracking-[0.15em]">{t(`role.${user.role}`)}</div>
+            </div>
+            <button type="button" onClick={() => void logout()} className="btn btn-ghost" aria-label={t('nav.logout')}>
+              <LogOut size={14} />
+              <span className="hidden sm:inline">{t('nav.logout')}</span>
+            </button>
           </div>
-          <button type="button" onClick={() => void logout()} className="btn btn-ghost" aria-label={t('nav.logout')}>
-            <LogOut size={14} />
-            <span className="hidden sm:inline">{t('nav.logout')}</span>
-          </button>
-        </div>
-      </header>
+        </header>
+      </div>
 
       <main className="flex-1">
         <Outlet />

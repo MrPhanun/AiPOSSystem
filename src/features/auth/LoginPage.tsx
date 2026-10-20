@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Shirt } from 'lucide-react'
 import { homeFor, useAuth } from './AuthContext'
 import { apiStatus } from '../../lib/api-client'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
@@ -37,26 +37,35 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="grid min-h-screen md:grid-cols-2">
+    <div className="relative grid min-h-screen overflow-hidden md:grid-cols-2">
+      <div className="blob -left-24 top-10 h-80 w-80 bg-black/20" />
+      <div className="blob right-0 top-1/3 h-96 w-96 bg-white" style={{ animationDelay: '-4s' }} />
+      <div className="blob bottom-0 left-1/3 h-72 w-72 bg-black/25" style={{ animationDelay: '-8s' }} />
+
       {/* Brand panel */}
-      <div className="relative hidden items-center justify-center border-r border-ink bg-tile md:flex">
-        <div className="absolute left-6 top-6 mono text-[11px] uppercase tracking-[0.2em]">HORANGI / STYLEPOS</div>
-        <TigerLogo size={360} />
-        <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
-          <p className="heading max-w-[14ch] text-3xl leading-[0.95]">{t('app.tagline')}</p>
-          <span className="mono text-[11px]">v0.1</span>
+      <div className="relative hidden flex-col items-center justify-center p-10 md:flex">
+        <div className="absolute left-8 top-8">
+          <Wordmark size={40} />
         </div>
+        <div className="floaty glass grid h-[26rem] w-[26rem] place-items-center rounded-[3rem]">
+          <TigerLogo size={340} />
+        </div>
+        <p className="heading mt-10 flex max-w-[18ch] flex-col items-center gap-3 text-center text-4xl leading-[1.05]">
+          <Shirt size={36} strokeWidth={2.2} />
+          {t('app.slogan')}
+        </p>
       </div>
 
       {/* Form panel */}
-      <div className="relative flex flex-col justify-center px-6 py-12 sm:px-14">
-        <div className="absolute right-4 top-4">
+      <div className="relative flex flex-col justify-center px-5 py-12 sm:px-10">
+        <div className="absolute right-5 top-5">
           <LanguageSwitcher />
         </div>
 
-        <div className="mx-auto w-full max-w-sm">
-          <div className="mb-10 md:hidden">
+        <div className="glass mx-auto w-full max-w-md rounded-[2rem] p-8 sm:p-10">
+          <div className="mb-8 md:hidden">
             <Wordmark size={44} />
+            <p className="mt-4 flex items-center gap-2 text-sm font-bold"><Shirt size={16} />{t('app.slogan')}</p>
           </div>
 
           <h1 className="heading text-4xl">{t('login.title')}</h1>
@@ -73,12 +82,12 @@ export default function LoginPage() {
             </label>
 
             {error && (
-              <p role="alert" className="border border-crimson px-3 py-2 text-sm font-semibold text-crimson">
+              <p role="alert" className="rounded-2xl border border-crimson/40 bg-crimson/10 px-4 py-2.5 text-sm font-semibold text-crimson">
                 {error}
               </p>
             )}
 
-            <button type="submit" disabled={busy} className="btn btn-solid w-full py-3">
+            <button type="submit" disabled={busy} className="btn btn-solid w-full py-3.5 text-sm">
               {busy && <Loader2 size={14} className="animate-spin" />}
               {t('login.submit')}
             </button>

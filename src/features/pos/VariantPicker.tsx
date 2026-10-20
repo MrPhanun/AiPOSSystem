@@ -45,7 +45,7 @@ export default function VariantPicker({ variants, cart, fmt, onAdd, onClose }: {
     <Modal title={first.product_name} onClose={onClose}>
       <div className="space-y-5">
         <div className="flex gap-4">
-          <ProductImage url={first.image_url} alt={first.product_name} className="h-28 w-28 shrink-0 border border-ink" />
+          <ProductImage url={first.image_url} alt={first.product_name} className="h-28 w-28 shrink-0 rounded-2xl border border-white/80" />
           <div>
             <span className="mono text-[10px] uppercase tracking-wider">{first.category_name}</span>
             <div className="mono mt-1 text-3xl font-bold text-ink">{fmt(selected?.selling_price ?? first.selling_price)}</div>
@@ -61,7 +61,7 @@ export default function VariantPicker({ variants, cart, fmt, onAdd, onClose }: {
               const on = c === color
               return (
                 <button key={c} type="button" disabled={!ok} onClick={() => pickColor(c)}
-                  className={`flex items-center gap-2 border px-3 py-2 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-40 ${on ? 'border-ink bg-ink text-paper' : 'border-ink bg-paper hover:bg-tile'}`}>
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-40 ${on ? 'border-ink bg-ink text-paper' : 'border-ink bg-paper hover:bg-tile'}`}>
                   <span className="h-4 w-4 rounded-full border border-graphite" style={{ background: SWATCH[c.toLowerCase()] ?? '#e5e5e5' }} />
                   {c}
                 </button>
@@ -78,7 +78,7 @@ export default function VariantPicker({ variants, cart, fmt, onAdd, onClose }: {
               const on = v.id === sizeId
               return (
                 <button key={v.id} type="button" disabled={!ok} onClick={() => { setSizeId(v.id); setQty(1) }}
-                  className={`min-w-14 border px-3 py-2 text-center text-sm font-bold disabled:cursor-not-allowed disabled:opacity-40 ${on ? 'border-ink bg-acid text-ink' : 'border-ink bg-paper hover:bg-tile'}`}>
+                  className={`min-w-14 rounded-2xl border px-3 py-2 text-center transition text-sm font-bold disabled:cursor-not-allowed disabled:opacity-40 ${on ? 'border-ink bg-acid text-ink' : 'border-ink bg-paper hover:bg-tile'}`}>
                   {v.size}
                   <span className={`mono block text-[10px] font-normal ${ok && left(v) <= v.low_stock_threshold ? 'text-crimson' : ''}`}>{ok ? left(v) : t('pos.soldOut')}</span>
                 </button>
@@ -87,8 +87,8 @@ export default function VariantPicker({ variants, cart, fmt, onAdd, onClose }: {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-3 border-t border-ink pt-4">
-          <div className="inline-flex items-stretch border border-ink">
+        <div className="flex items-center justify-between gap-3 border-t border-black/10 pt-4">
+          <div className="inline-flex items-stretch overflow-hidden rounded-full border border-white/80 bg-white/60">
             <button type="button" disabled={qty <= 1} onClick={() => setQty(qty - 1)} className="px-3 hover:bg-tile disabled:opacity-30" aria-label="minus"><Minus size={14} /></button>
             <span className="mono min-w-10 border-x border-ink px-3 py-2 text-center font-bold text-ink">{qty}</span>
             <button type="button" disabled={!selected || qty >= max} onClick={() => setQty(qty + 1)} className="px-3 hover:bg-tile disabled:opacity-30" aria-label="plus"><Plus size={14} /></button>
