@@ -6,7 +6,9 @@ import type { Locale } from '../types'
 
 const STORAGE_KEY = 'stylepos.lang'
 
-const saved = (localStorage.getItem(STORAGE_KEY) as Locale | null) ?? 'en'
+// Storage can be blocked (private mode, strict browser shields) - never let that crash the app.
+const read = (): Locale | null => { try { return localStorage.getItem(STORAGE_KEY) as Locale | null } catch { return null } }
+const saved = read() ?? 'en'
 
 i18n.use(initReactI18next).init({
   resources: { en: { translation: en }, km: { translation: km } },
@@ -18,7 +20,7 @@ i18n.use(initReactI18next).init({
 document.documentElement.lang = saved
 
 export function setLanguage(lang: Locale) {
-  localStorage.setItem(STORAGE_KEY, lang) // browser-level fallback for signed-out users
+  try { localStorage.setItem(STORAGE_KEY, lang) } catch { /* storage unavailable */ } // fallback for signed-out users
   document.documentElement.lang = lang
   return i18n.changeLanguage(lang)
 }
